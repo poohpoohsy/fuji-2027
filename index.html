@@ -47,7 +47,9 @@ a{color:var(--lake)}
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--mist) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .bar .wrap{display:flex;align-items:center;gap:14px;padding-block:10px}
 .brand{font-family:var(--f-display);font-size:18px;text-decoration:none;color:var(--ink);white-space:nowrap}
-.brand span{color:var(--dawn)}
+.brand{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.brand .shrug{font-family:var(--f-body);font-size:16px;font-weight:500;color:var(--dawn);white-space:nowrap}
+.brand small{font-family:var(--f-body);font-size:11.5px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dots{display:flex;gap:6px;flex:1;justify-content:center;min-width:0}
 .dots a{width:9px;height:9px;border-radius:50%;background:var(--line);display:block;transition:background .3s,transform .3s}
 .dots a.on{background:var(--dawn);transform:scale(1.35)}
@@ -63,7 +65,7 @@ a{color:var(--lake)}
 .eyebrow{font:500 12px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
 .hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,8.4vw,92px);line-height:1.02;letter-spacing:-.01em;margin:.25em 0 .2em;text-wrap:balance;max-width:12ch}
 .hero h1 em{font-style:normal;color:var(--dawn)}
-.zh-line{font-family:var(--f-zh);font-weight:700;font-size:clamp(22px,3.6vw,34px);line-height:1.4;margin:0}
+.zh-line{font-family:var(--f-zh);font-weight:700;font-size:clamp(34px,6.4vw,64px);line-height:1.25;margin:.3em 0 0;text-wrap:balance}
 .hero .sub{color:var(--ink-soft);max-width:40ch;margin:14px 0 0}
 .meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:22px 0 26px;font:500 13px/1.4 var(--f-mono);letter-spacing:.06em;color:var(--ink)}
 .meta b{color:var(--dawn);font-weight:500}
@@ -162,13 +164,18 @@ h2{font-family:var(--f-zh);font-weight:700;font-size:clamp(28px,4.6vw,44px);line
 @media (max-width:620px){.facts{grid-template-columns:minmax(0,1fr)}}
 .facts h3{font:700 15px/1.4 var(--f-body);margin:0 0 6px}
 .facts ul{margin:0;padding-left:18px;color:var(--ink-soft);font-size:15px}
+.wa{display:flex;flex-wrap:wrap;gap:12px}
+.wa .btn{padding:16px 24px;font-size:17px}
+.wa-note{font-size:13px;color:var(--ink-soft);margin:10px 0 0}
 .copybox{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px dashed var(--dawn);border-radius:var(--r);padding:16px}
 .copybox q{font-family:var(--f-zh);font-weight:600;font-size:18px;flex:1 1 220px;quotes:"「" "」"}
 .toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--mist);padding:10px 16px;border-radius:999px;font-size:14px;z-index:50;opacity:0;pointer-events:none;transition:opacity .25s;max-width:calc(100% - 32px);text-align:center}
 .toast.show{opacity:1}
 
 footer{padding-block:40px 120px;color:var(--ink-soft);font-size:13px;border-top:1px solid var(--line)}
-footer .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
+footer .wrap{display:flex;justify-content:center;text-align:center}
+.logo-foot{font-size:14px;color:var(--ink)}
+.logo-foot .shrug{font-weight:500;color:var(--dawn)}
 footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:pointer;padding:0;text-decoration:underline}
 
 /* player */
@@ -180,6 +187,9 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
 .player .now span{font:500 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;opacity:.7}
 .player button{background:none;border:1px solid color-mix(in srgb,var(--mist) 40%,transparent);color:inherit;border-radius:999px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;flex:none}
 .player button svg{width:14px;height:14px;fill:currentColor}
+.seek{display:flex;align-items:center;gap:10px;margin-top:6px}
+.seek input{flex:1;min-width:0;accent-color:var(--sun)}
+.seek time{font:500 11px/1 var(--f-mono);opacity:.8;font-variant-numeric:tabular-nums;white-space:nowrap}
 
 /* studio */
 .studio{position:fixed;inset:0;z-index:60;background:color-mix(in srgb,var(--ink) 55%,transparent);display:grid;place-items:end center;padding:16px}
@@ -202,9 +212,8 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
 <body>
 <header class="bar" id="top">
   <div class="wrap">
-    <a class="brand" href="#welcome">Fuji <span>2027</span></a>
+    <a class="brand" href="#welcome" aria-label="Back to top"><span class="shrug">¯\_(ツ)_/¯</span><small>每星期做一件無效率但有感覺嘅事</small></a>
     <nav class="dots" id="dots" aria-label="Chapters"></nav>
-    <button class="btn small" id="playAll" type="button" aria-label="Play Sandy's story"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg><span>聽故事</span></button>
   </div>
   <div class="progress" id="readProgress"></div>
 </header>
@@ -214,12 +223,11 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
   <section class="hero" id="welcome" data-title="Enjoy the Journey, Together">
     <div class="wrap">
       <div class="eyebrow">富士山 · Mt Fuji · 9–13 July 2027</div>
-      <h1>Enjoy the Journey, <em>Together.</em></h1>
-      <p class="zh-line">登頂係驚喜，同行先係回憶。</p>
+      <p class="zh-line">登頂係驚喜，<br>同行先係回憶。</p>
       <p class="sub">It's not just about reaching the summit. It's about the moments we share along the way.</p>
       <div class="meta"><span><b>5</b> 日 <b>4</b> 夜</span><span>開山祭 × 手筒花火 × 御來光</span><span>最多 <b>8</b> 位好朋友</span></div>
       <div class="cta-row">
-        <button class="btn listen" data-ch="welcome" type="button"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>聽 Sandy 講</button>
+        <button class="btn listen" id="listenAll" type="button"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>notes with Hiro -2Nov2026</button>
         <a class="btn ghost" href="#days">睇五日行程</a>
       </div>
     </div>
@@ -243,37 +251,12 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
     </div>
   </section>
 
-  <!-- 2 -->
-  <section class="chapter" id="letter" data-title="一年一次，我哋又出發">
-    <div class="wrap grid">
-      <div class="text">
-        <div class="ch-label">Chapter 2 <i>· From Sandy</i></div>
-        <h2>一年一次，<br>我哋又出發</h2>
-        <p class="en">Once a year, we go somewhere together.</p>
-        <p>瑞士嘅湖、聖塞巴斯蒂安嘅 pintxos，都係我哋一齊行出嚟嘅回憶。2027 年，我想同大家去富士山：睇一場山腳嘅火祭，喺山屋過一晚，清晨一齊等日出。</p>
-        <p>今次有登山領隊 Hiro 帶路。我同佢傾過電話，將重點整理晒喺呢度，大家慢慢睇。</p>
-        <button class="btn ghost listen" data-ch="letter" type="button"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>聽呢段</button>
-      </div>
-      <div>
-        <blockquote class="letter">
-          It's not just about reaching the summit.<br>It's about the moments we share along the way.
-          <span class="sig">— Sandy</span>
-        </blockquote>
-        <div class="trips" aria-label="Our trips"><span>Switzerland</span><span>San Sebastián</span><span class="now">Fuji 2027</span></div>
-      </div>
-    </div>
-  </section>
-
   <!-- 3 -->
   <section class="chapter" id="festival" data-title="10 Jul · 開山祭與手筒花火">
     <div class="wrap grid flip">
       <div class="text">
-        <div class="ch-label">Chapter 3 <i>· Sat 10 Jul</i></div>
+        <div class="ch-label">Chapter 2 <i>· Sat 10 Jul</i></div>
         <h2>山開咗，<br>火花為我哋送行</h2>
-        <p class="en">The mountain opens, and the festival sends us off.</p>
-        <p>七月十號係富士宮一邊嘅開山日。我哋去富士山本宮淺間大社睇開山祭，晚上有手筒花火：當地人雙手抱住竹筒，金色火花直噴上天。</p>
-        <p>未上山，已經有一晚好難忘嘅相。空檔可以喺淺間大社旁邊嘅湧玉池行下，再食碟富士宮炒麵。</p>
-        <button class="btn ghost listen" data-ch="festival" type="button"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>聽呢段</button>
       </div>
       <figure class="media" data-media="festival" style="margin:0">
         <canvas id="sparks" width="900" height="640" aria-label="Golden sparks from handheld bamboo fireworks"></canvas>
@@ -286,9 +269,8 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
   <section class="chapter" id="route" data-title="兩條路線，一個山頂">
     <div class="wrap grid">
       <div class="text">
-        <div class="ch-label">Chapter 4 <i>· The route</i></div>
+        <div class="ch-label">Chapter 3 <i>· The route</i></div>
         <h2>由富士宮上，<br>由吉田落</h2>
-        <p class="en">Up one side, down the other. Two views of the same mountain.</p>
         <div class="stats">
           <div class="stat"><b>3,776m</b><span>剣ヶ峰 最高點</span></div>
           <div class="stat"><b>~1,400m</b><span>兩日總上升</span></div>
@@ -298,7 +280,6 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
           <div class="leg" style="--c:var(--scoria)"><h3>上山 · 富士宮線 4.3 km</h3><p>五合目 2,400m 起步，第一日慢慢行到九合目山屋 3,460m（上升約 1,060m）。翌朝再上約 316m 到山頂。路短啲、斜啲，石路較多。</p></div>
           <div class="leg" style="--c:var(--lake)"><h3>落山 · 吉田線 ~7 km</h3><p>連續之字形火山碎石路，坡度較易控制，但要防滑、護膝。上落起終點唔同，有專車接送。</p></div>
         </div>
-        <button class="btn ghost listen" data-ch="route" type="button"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>聽呢段</button>
       </div>
       <figure class="media" data-media="route" style="margin:0">
         <svg id="profile" viewBox="0 0 700 380" role="img" aria-label="Elevation profile: Fujinomiya 5th station 2,400 m to the 9th station hut at 3,460 m, the summit at 3,776 m, then down the Yoshida trail to 2,305 m"></svg>
@@ -310,10 +291,8 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
   <!-- 5 -->
   <section class="chapter" id="days" data-title="五日旅程">
     <div class="wrap">
-      <div class="ch-label">Chapter 5 <i>· 9–13 Jul 2027</i></div>
+      <div class="ch-label">Chapter 4 <i>· 9–13 Jul 2027</i></div>
       <h2>五日四夜，慢慢享受</h2>
-      <p class="en">Five days. Two on the mountain, three for everything else we love.</p>
-      <button class="btn ghost listen" data-ch="days" type="button"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>聽呢段</button>
       <ol class="days">
         <li class="day"><time><b>9</b>JUL · FRI</time><div><h3>東京集合</h3><p>酒店見面，休息同準備。今晚好好食一餐，慶祝又一年齊人出發。</p></div></li>
         <li class="day"><time><b>10</b>JUL · SAT</time><div><h3>富士山開山祭</h3><p>淺間大社祭典，晚上手筒花火。</p><span class="tag">最多相嘅一日</span></div></li>
@@ -328,17 +307,8 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
   <section class="chapter" id="dawn" data-title="御來光">
     <div class="wrap grid flip">
       <div class="text">
-        <div class="ch-label">Chapter 6 <i>· Mon 12 Jul, about 4:30am</i></div>
+        <div class="ch-label">Chapter 5 <i>· Mon 12 Jul, about 4:30am</i></div>
         <h2>喺雲海上面，<br>一齊等日出</h2>
-        <p class="en">Reaching the summit is a wonderful possibility, not a requirement.</p>
-        <p>七月嘅日出大約清晨四點半。天氣好嘅話，太陽會喺雲海上面慢慢升起，日本人叫佢「御來光」。</p>
-        <p>山上天氣變得好快。改計劃唔係失敗，而係照顧好大家：</p>
-        <div class="plans">
-          <div class="plan"><span class="k">晴</span><p><b>一齊上剣ヶ峰</b>喺最高點睇日出，影大合照。</p></div>
-          <div class="plan"><span class="k">風雨</span><p><b>喺山屋附近睇日出</b>九合目已經喺雲海之上，一樣好靚。</p></div>
-          <div class="plan"><span class="k">唔舒服</span><p><b>跟 Hiro 安排落山</b>健康行先。成個旅程仲有好多值得記住嘅時刻。</p></div>
-        </div>
-        <button class="btn ghost listen" data-ch="dawn" type="button"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>聽呢段</button>
       </div>
       <figure class="media" data-media="dawn" style="margin:0">
         <svg viewBox="0 0 600 460" role="img" aria-label="Sunrise above a sea of clouds, seen from the mountain">
@@ -359,26 +329,17 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
 
   <!-- 7 -->
   <section class="chapter" id="ready" data-title="準備好，就會更開心">
-    <div class="wrap grid">
+    <div class="wrap">
       <div class="text">
-        <div class="ch-label">Chapter 7 <i>· Getting ready</i></div>
+        <div class="ch-label">Chapter 6 <i>· Getting ready</i></div>
         <h2>準備好，<br>行得更開心</h2>
         <p class="en">You don't need to be an expert hiker. You do need to be ready.</p>
         <p>Hiro 講得好坦白：唔使係專業行山人士，但要有基本體能。</p>
         <ul class="honest">
           <li>每星期至少一次會出汗嘅戶外活動，例如行山、跑步、踩單車。</li>
-          <li>出發前多啲練上斜同落斜，落山最考膝頭。</li>
-          <li>瑜伽好好，但唔可以代替帶氧運動。</li>
           <li>3,000 米以上，邊個都可能有高山反應：頭痛、作嘔、頭暈。有就即刻講。</li>
         </ul>
         <p style="margin-top:14px">Hiro 會控制步速、安排休息，報名後亦希望見下大家，了解每個人嘅需要。</p>
-        <button class="btn ghost listen" data-ch="ready" type="button"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>聽呢段</button>
-      </div>
-      <div class="pack" id="pack">
-        <div class="pack-head"><h3>我嘅裝備清單</h3><span class="pack-count" id="packCount">0 / 0</span></div>
-        <div class="meter"><i id="packMeter"></i></div>
-        <ul id="packList"></ul>
-        <p class="note">剔咗嘅項目只會留喺你自己部手機。山頂清晨可能接近 0°C。</p>
       </div>
     </div>
   </section>
@@ -386,10 +347,8 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
   <!-- 8 -->
   <section class="chapter care" id="care" data-title="同上同落">
     <div class="wrap">
-      <div class="ch-label">Chapter 8 <i>· Our promise</i></div>
+      <div class="ch-label">Chapter 7 <i>· Our promise</i></div>
       <h2>同上同落</h2>
-      <p class="pledge">Enjoy the journey, look after one another, and return safely.</p>
-      <button class="btn listen" data-ch="care" type="button"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>聽呢段</button>
       <div class="promises">
         <div class="promise"><b>一齊行</b><p>行得快嘅陪住行得慢嘅，唔會各自行各自。</p></div>
         <div class="promise"><b>即刻講</b><p>頭痛、凍、攰都要講出嚟。冇人會覺得你麻煩。</p></div>
@@ -401,24 +360,13 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
 
   <!-- 9 -->
   <section class="chapter" id="join" data-title="一齊去嗎？">
-    <div class="wrap grid">
-      <div class="text">
-        <div class="ch-label">Chapter 9 <i>· Join us</i></div>
-        <h2>想唔想一齊去？</h2>
-        <p class="en">This looks like a beautiful experience to share. Come with us.</p>
-        <div class="price">HK$12,800<small>每位</small></div>
-        <p style="color:var(--ink-soft);margin:0">最多 8 人小團 · Hiro 領隊 · 報名需全數付款</p>
-        <button class="btn ghost listen" data-ch="join" type="button" style="margin-top:16px"><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg>聽呢段</button>
-      </div>
+    <div class="wrap">
       <div>
-        <div class="facts">
-          <div><h3>另外計</h3><ul><li>機票</li><li>旅遊保險（要包高海拔行山）</li><li>個人裝備</li><li>入山費（2026 年為每人 ¥4,000）</li></ul></div>
-          <div><h3>報名前問清楚</h3><ul><li>2027 年正式入山規定同收費</li><li>天氣改動同取消條款</li><li>九合目山屋係大通舖</li></ul></div>
+        <div class="wa">
+          <a class="btn wa-yes" href="https://wa.me/?text=Sandy%EF%BC%8C%E6%88%91%E6%83%B3%E4%B8%80%E9%BD%8A%E5%8E%BB%E5%AF%8C%E5%A3%AB%E5%B1%B1%202027%EF%BC%81" target="_blank" rel="noopener">我想一齊去富士山！</a>
+          <a class="btn ghost" href="https://wa.me/?text=Sandy%EF%BC%8CApology%EF%BC%81%E4%BB%8A%E6%AC%A1%E5%AF%8C%E5%A3%AB%E5%B1%B1%E6%88%91%E5%8E%BB%E5%94%94%E5%88%B0%EF%BC%8C%E7%A5%9D%E4%BD%A0%E5%93%8B%E7%8E%A9%E5%BE%97%E9%96%8B%E5%BF%83%EF%BC%8C%E7%AD%89%E4%BD%A0%E5%93%8B%E5%98%85%E9%9D%9A%E7%9B%B8%EF%BC%81" target="_blank" rel="noopener">Apology!</a>
         </div>
-        <div class="copybox">
-          <q id="joinMsg">Sandy，我想一齊去富士山 2027！</q>
-          <button class="btn" id="copyJoin" type="button">複製，WhatsApp 我</button>
-        </div>
+        <p class="wa-note">撳一下會打開 WhatsApp，揀 Sandy 就可以發送。</p>
         <p style="font-size:14px;color:var(--ink-soft);margin-top:14px">官方團資料同真實相片：<a href="https://ccpeaktime.com" target="_blank" rel="noopener">PeakTime 富士登山 2027</a> · 入山規定：<a href="https://www.fujisan-climb.jp/en/" target="_blank" rel="noopener">Official Mt. Fuji Climbing</a></p>
       </div>
     </div>
@@ -427,35 +375,15 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
 
 <footer>
   <div class="wrap">
-    <span>Fuji 2027 · Prepared by Sandy with Hiro's notes · 登頂係驚喜，同行先係回憶。</span>
-    <button type="button" id="openStudio">錄音設定 Studio</button>
+    <div class="logo-foot"><span class="shrug">¯\_(ツ)_/¯</span> • 每星期做一件無效率但有感覺嘅事</div>
   </div>
 </footer>
 
 <div class="player" id="player" aria-live="polite">
-  <div class="now"><span id="pNum">Chapter 1 / 9</span><b id="pTitle">Enjoy the Journey, Together</b></div>
-  <button type="button" id="pPrev" aria-label="Previous chapter"><svg viewBox="0 0 12 12"><path d="M2 0h2v12H2zM12 0v12L4 6z"/></svg></button>
+  <div class="now"><span>Sandy · 2Nov2026</span><b>notes with Hiro</b>
+    <div class="seek"><input type="range" id="pSeek" min="0" max="1000" value="0" aria-label="Position in recording"><time id="pTime">0:00 / 0:00</time></div></div>
   <button type="button" id="pToggle" aria-label="Pause"><svg viewBox="0 0 12 12" id="pIcon"><path d="M1 0h4v12H1zM7 0h4v12H7z"/></svg></button>
-  <button type="button" id="pNext" aria-label="Next chapter"><svg viewBox="0 0 12 12"><path d="M8 0h2v12H8zM0 0v12l8-6z"/></svg></button>
   <button type="button" id="pClose" aria-label="Stop"><svg viewBox="0 0 12 12"><path d="M1 1h10v10H1z"/></svg></button>
-</div>
-
-<div class="studio" id="studio" hidden>
-  <div class="studio-card" role="dialog" aria-labelledby="studioTitle">
-    <h3 id="studioTitle">錄音設定 Studio</h3>
-    <p>載入 Sandy 嘅錄音，邊聽邊撳「開始」「結束」標記每一章。完成後複製設定，貼落 narration.js。錄音只會喺呢部機播放，唔會上載。</p>
-    <label class="btn ghost small" for="studioFile" style="cursor:pointer">揀錄音檔案</label>
-    <input type="file" id="studioFile" accept="audio/*" hidden>
-    <span id="studioName" style="font-size:13px;color:var(--ink-soft);margin-left:8px"></span>
-    <audio id="studioAudio" controls preload="metadata"></audio>
-    <div id="studioRows"></div>
-    <div class="row">
-      <button class="btn small" id="studioApply" type="button">用呢個設定試播</button>
-      <button class="btn ghost small" id="studioCopy" type="button">複製 narration.js</button>
-      <button class="btn ghost small" id="studioClose" type="button">關閉</button>
-    </div>
-    <pre id="studioOut" aria-label="Generated narration settings"></pre>
-  </div>
 </div>
 
 <div class="toast" id="toast" role="status"></div>
@@ -572,90 +500,33 @@ footer button{background:none;border:none;color:var(--lake);font:inherit;cursor:
     if(m.type==='video'){ el.setAttribute('muted',''); el.setAttribute('playsinline',''); }
     const first = box.firstElementChild; box.replaceChild(el, first);
   });
-
-  /* ---------- packing list ---------- */
-  (function(){
-    const items=[
-      ['防水外套','風雨都擋得住，唔係風褸'],['防水褲',''],['防水行山鞋','出發前已經行過幾次'],['保暖中層','抓毛或羽絨'],
-      ['手套同冷帽','山頂清晨接近 0°C'],['頭燈＋後備電池','清晨上山要用'],['行山杖','落山護膝'],['水 2 公升','山屋有得買但貴'],
-      ['能量小食','朱古力、果仁'],['防曬、太陽眼鏡','山上冇遮擋'],['日元散紙','山屋廁所要收費'],['旅遊保險','包高海拔行山']
-    ];
-    let saved={}; try{ saved=JSON.parse(localStorage.getItem('fuji27-pack')||'{}'); }catch(e){}
-    const ul=$('#packList');
-    items.forEach((it,i)=>{ const li=document.createElement('li'); li.innerHTML='<label><input type="checkbox" id="pk'+i+'"'+(saved[i]?' checked':'')+'><span>'+it[0]+(it[1]?'<small>'+it[1]+'</small>':'')+'</span></label>'; ul.appendChild(li); });
-    function upd(){ const boxes=$$('input',ul); const n=boxes.filter(b=>b.checked).length; $('#packCount').textContent=n+' / '+boxes.length; $('#packMeter').style.width=(n/boxes.length*100)+'%'; const o={}; boxes.forEach((b,i)=>{ if(b.checked) o[i]=1; }); try{ localStorage.setItem('fuji27-pack',JSON.stringify(o)); }catch(e){} }
-    ul.addEventListener('change',upd); upd();
-  })();
-
-  /* ---------- copy join message ---------- */
-  $('#copyJoin').addEventListener('click',()=>{
-    const txt=$('#joinMsg').textContent;
-    const fallback=()=>{ const r=document.createRange(); r.selectNodeContents($('#joinMsg')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); toast('已選取，長按複製'); };
-    try{ navigator.clipboard.writeText(txt).then(()=>toast('已複製，貼去 WhatsApp 畀 Sandy'),fallback); }catch(e){ fallback(); }
-  });
-
-  /* ---------- narration engine ---------- */
-  const audio = new Audio(); audio.preload='metadata';
-  let override = null;          // blob url from Studio
-  let playingId = null, story = false;
-  function seg(id){
-    const c = N.chapters[id]; if(!c) return null;
-    const src = c.file || override || N.file; if(!src) return null;
-    const start = +c.start||0, end = +c.end||0;
-    if(!c.file && !(end>start)) return null;
-    return {src, start, end: end>start ? end : null};
+  /* ---------- Sandy's recording: one button, whole summary ---------- */
+  const audio = new Audio(); audio.preload='none';
+  const btn = $('#listenAll'), player = $('#player'), seek = $('#pSeek');
+  const fmt = t => { t = Math.max(0, Math.floor(t||0)); return Math.floor(t/60)+':'+String(t%60).padStart(2,'0'); };
+  function ui(){
+    const on = !audio.paused;
+    btn.classList.toggle('playing', on);
+    btn.querySelector('svg').innerHTML = on ? '<path d="M0 0h3.5v12H0zM6.5 0H10v12H6.5z"/>' : '<path d="M0 0l10 6-10 6z"/>';
+    $('#pIcon').innerHTML = on ? '<path d="M1 0h4v12H1zM7 0h4v12H7z"/>' : '<path d="M1 0l10 6-10 6z"/>';
+    $('#pToggle').setAttribute('aria-label', on ? 'Pause' : 'Play');
   }
-  const anyAudio = () => ids.some(seg);
-  function setButtons(){ $$('.listen').forEach(b=>b.classList.toggle('playing', b.dataset.ch===playingId && !audio.paused)); $('#pIcon').innerHTML = audio.paused ? '<path d="M1 0l10 6-10 6z"/>' : '<path d="M1 0h4v12H1zM7 0h4v12H7z"/>'; $('#pToggle').setAttribute('aria-label', audio.paused?'Play':'Pause'); }
-  function showPlayer(id){ const i=ids.indexOf(id); $('#pNum').textContent='Chapter '+(i+1)+' / '+ids.length; $('#pTitle').textContent=chapters[i].dataset.title; $('#player').classList.add('show'); }
-  function play(id, fromStory){
-    const s = seg(id);
-    if(!s){ if(fromStory){ return next(id); } toast('Sandy 嘅錄音即將加入，敬請期待'); return; }
-    playingId = id; story = !!fromStory;
-    const abs = new URL(s.src, location.href).href;
-    const go = ()=>{ try{ audio.currentTime = s.start; }catch(e){} audio.play().catch(()=>toast('撳一下播放掣開始')); };
-    if(audio.src !== abs){ audio.src = s.src; audio.addEventListener('loadedmetadata', go, {once:true}); audio.load(); } else go();
-    audio._end = s.end;
-    showPlayer(id);
-    if(story){ document.getElementById(id).scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'}); }
+  function start(){
+    if(!N.file){ toast('Sandy 嘅錄音即將加入'); return; }
+    if(!audio.src) audio.src = N.file;
+    player.classList.add('show');
+    audio.play().catch(()=>toast('撳多一次播放'));
   }
-  function next(id){ const i=ids.indexOf(id); for(let k=i+1;k<ids.length;k++){ if(seg(ids[k])) return play(ids[k], story); } stop(); toast('完 · 登頂係驚喜，同行先係回憶。'); }
-  function prev(id){ const i=ids.indexOf(id); for(let k=i-1;k>=0;k--){ if(seg(ids[k])) return play(ids[k], story); } }
-  function stop(){ audio.pause(); playingId=null; story=false; $('#player').classList.remove('show'); setButtons(); }
-  audio.addEventListener('timeupdate',()=>{ if(audio._end && audio.currentTime>=audio._end){ audio.pause(); if(story) next(playingId); else setButtons(); } });
-  audio.addEventListener('ended',()=>{ if(story) next(playingId); else setButtons(); });
-  ['play','pause'].forEach(e=>audio.addEventListener(e,setButtons));
-  audio.addEventListener('error',()=>{ if(audio.src) toast('搵唔到錄音檔，請檢查 narration.js 嘅路徑'); });
-
-  $$('.listen').forEach(b=>b.addEventListener('click',()=>{ if(playingId===b.dataset.ch && !audio.paused){ audio.pause(); } else play(b.dataset.ch,false); }));
-  $('#playAll').addEventListener('click',()=>{ if(!anyAudio()){ toast('Sandy 嘅錄音即將加入，敬請期待'); return; } story=true; const start = ids.slice(current).find(seg) || ids.find(seg); play(start,true); });
-  $('#pToggle').addEventListener('click',()=>{ if(audio.paused){ audio.play().catch(()=>{}); } else audio.pause(); });
-  $('#pNext').addEventListener('click',()=>playingId && next(playingId));
-  $('#pPrev').addEventListener('click',()=>playingId && prev(playingId));
-  $('#pClose').addEventListener('click',stop);
-
-  /* ---------- Studio: set timings from a recording ---------- */
-  const st=$('#studio'), sa=$('#studioAudio');
-  function rowsHTML(){ return ids.map((id,i)=>{ const c=N.chapters[id]||{}; return '<div class="srow" data-id="'+id+'"><span>'+(i+1)+'. '+chapters[i].dataset.title+'</span><input id="s_'+id+'" inputmode="decimal" aria-label="start seconds" value="'+(+c.start||0)+'"><input id="e_'+id+'" inputmode="decimal" aria-label="end seconds" value="'+(+c.end||0)+'"><span class="acts"><button type="button" data-a="s">開始</button><button type="button" data-a="e">結束</button><button type="button" data-a="p">試聽</button></span></div>'; }).join(''); }
-  function readRows(){ ids.forEach(id=>{ N.chapters[id]=N.chapters[id]||{}; N.chapters[id].start=Math.max(0,parseFloat($('#s_'+id).value)||0); N.chapters[id].end=Math.max(0,parseFloat($('#e_'+id).value)||0); }); }
-  function cfg(){ readRows(); const lines=ids.map(id=>{ const c=N.chapters[id]; return '    '+(id+':').padEnd(10)+'{ start: '+c.start+', end: '+c.end+' }'; }); return 'window.NARRATION = {\n  file: "audio/'+($('#studioName').dataset.fn||'sandy-fuji.m4a')+'",\n  chapters: {\n'+lines.join(',\n')+'\n  }\n};'; }
-  function openStudio(){ $('#studioRows').innerHTML=rowsHTML(); $('#studioOut').textContent=cfg(); st.hidden=false; }
-  function closeStudio(){ st.hidden=true; if(location.hash==='#studio') history.replaceState(null,'',location.pathname+location.search); }
-  $('#openStudio').addEventListener('click',openStudio);
-  $('#studioClose').addEventListener('click',closeStudio);
-  st.addEventListener('click',e=>{ if(e.target===st) closeStudio(); });
-  $('#studioFile').addEventListener('change',e=>{ const f=e.target.files[0]; if(!f) return; if(override) URL.revokeObjectURL(override); override=URL.createObjectURL(f); sa.src=override; $('#studioName').textContent=f.name; $('#studioName').dataset.fn=f.name; $('#studioOut').textContent=cfg(); });
-  $('#studioRows').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; const id=b.closest('.srow').dataset.id; const t=+sa.currentTime.toFixed(1);
-    if(b.dataset.a==='s'){ $('#s_'+id).value=t; const i=ids.indexOf(id); if(i>0){ const pe=$('#e_'+ids[i-1]); if(!(+pe.value>0)) pe.value=t; } }
-    if(b.dataset.a==='e'){ $('#e_'+id).value=t; }
-    if(b.dataset.a==='p'){ if(!override){ toast('請先揀錄音檔案'); return; } const s=+$('#s_'+id).value||0, en=+$('#e_'+id).value||0; sa.currentTime=s; sa.play(); const stopAt=()=>{ if(en>s && sa.currentTime>=en){ sa.pause(); sa.removeEventListener('timeupdate',stopAt);} }; sa.addEventListener('timeupdate',stopAt); }
-    $('#studioOut').textContent=cfg(); });
-  $('#studioRows').addEventListener('input',()=>{ $('#studioOut').textContent=cfg(); });
-  $('#studioApply').addEventListener('click',()=>{ if(!override){ toast('請先揀錄音檔案'); return; } readRows(); N.file = N.file || 'local'; sa.pause(); closeStudio(); toast('已套用，撳「聽故事」試播'); });
-  $('#studioCopy').addEventListener('click',()=>{ const txt=cfg(); $('#studioOut').textContent=txt; const fb=()=>{ const r=document.createRange(); r.selectNodeContents($('#studioOut')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); toast('已選取，請手動複製'); }; try{ navigator.clipboard.writeText(txt).then(()=>toast('已複製，貼落 narration.js'),fb); }catch(e){ fb(); } });
-  function route(){ if(location.hash==='#studio') openStudio(); }
-  addEventListener('hashchange',route); route();
-  addEventListener('keydown',e=>{ if(e.key==='Escape' && !st.hidden) closeStudio(); });
+  btn.addEventListener('click',()=>{ audio.paused ? start() : audio.pause(); });
+  $('#pToggle').addEventListener('click',()=>{ audio.paused ? start() : audio.pause(); });
+  $('#pClose').addEventListener('click',()=>{ audio.pause(); try{ audio.currentTime=0; }catch(e){} player.classList.remove('show'); ui(); });
+  audio.addEventListener('timeupdate',()=>{ const d=audio.duration||0; if(d && !seek._drag) seek.value = audio.currentTime/d*1000; $('#pTime').textContent = fmt(audio.currentTime)+' / '+fmt(d); });
+  audio.addEventListener('loadedmetadata',()=>{ $('#pTime').textContent = '0:00 / '+fmt(audio.duration); });
+  seek.addEventListener('input',()=>{ seek._drag=true; const d=audio.duration||0; if(d) audio.currentTime = seek.value/1000*d; });
+  seek.addEventListener('change',()=>{ seek._drag=false; });
+  audio.addEventListener('ended',()=>{ try{ audio.currentTime=0; }catch(e){} ui(); toast('登頂係驚喜，同行先係回憶。'); });
+  ['play','pause'].forEach(e=>audio.addEventListener(e,ui));
+  audio.addEventListener('error',()=>{ if(audio.src) toast('搵唔到錄音檔'); });
 })();
 </script>
 
